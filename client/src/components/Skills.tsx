@@ -10,6 +10,7 @@ import type { SVGProps } from "react";
 import type { IconType } from "@icons-pack/react-simple-icons";
 
 /* —— Simple-Icons imports —— */
+// @ts-ignore
 import {
   /* Web */
   SiHtml5,
