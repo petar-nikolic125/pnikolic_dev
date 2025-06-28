@@ -1,0 +1,107 @@
+/* ────────────────────────────────────────────────────────────────
+   HeroEnhanced.tsx · sword-shine edition (2025-06-29)
+───────────────────────────────────────────────────────────────── */
+import { useEffect } from "react";
+import { FileText, MessageCircle, MapPin } from "lucide-react";
+import { SiGithub, SiLinkedin, SiInstagram } from "react-icons/si";
+import { Button } from "@/components/ui/button";
+
+/* hard-coded links so they always resolve even if personalInfo.ts
+   isn't updated yet  */
+const links = {
+  resume:    "/resume.pdf",
+  github:    "https://github.com/petar-nikolic125/",
+  linkedin:  "https://www.linkedin.com/in/petar-nikolic-957875345/",
+  instagram: "https://instagram.com/nfs.u.2",
+  mail:      "mailto:petar.nikolic.04.7@gmail.com",
+};
+
+export default function HeroEnhanced() {
+  /* key-board shortcuts ----------------------------------------- */
+  useEffect(() => {
+    const h = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey) return;
+      const k = e.key.toLowerCase();
+      if (k === "r") window.open(links.resume,    "_blank");
+      if (k === "g") window.open(links.github,    "_blank");
+    };
+    addEventListener("keydown", h);
+    return () => removeEventListener("keydown", h);
+  }, []);
+
+  return (
+      <section id="hero" className="relative flex items-center justify-center bg-background" style={{ height: 'calc(100vh - 60px)' }}>
+        <div className="w-full max-w-7xl px-6 lg:px-12 text-center">
+          {/* ——— NAME with sword-shine ——— */}
+          <h1
+              className="hero-name relative inline-block select-none font-serif
+                     text-[clamp(3.5rem,9vw,6rem)] leading-none tracking-tight
+                     fg-base"
+          >
+            Petar&nbsp;Nikolić
+            {/* moving highlight */}
+            <span className="shine" />
+          </h1>
+
+          {/* title */}
+          <h2 className="mt-4 font-serif italic fg-subtle
+                       text-[clamp(2rem,4vw,2.75rem)] tracking-wider">
+            Software Engineer
+          </h2>
+
+          {/* tagline */}
+          <p className="mt-6 mx-auto max-w-xl fg-faint text-lg font-light">
+            Full-stack, distributed systems, real-time data
+          </p>
+
+          {/* location */}
+          <p className="mt-8 inline-flex items-center gap-2 text-xs uppercase tracking-widest fg-faint">
+            <MapPin className="h-3.5 w-3.5" />
+            Belgrade, Serbia • open to remote (EU &amp; US time zones)
+          </p>
+
+          {/* CTA buttons */}
+          <div className="mt-12 flex flex-wrap justify-center gap-4">
+            <Button
+                variant="outline"
+                className="gap-2 px-6 border fg-base hover:bg-card"
+                asChild
+            >
+              <a href={links.resume} target="_blank" rel="noopener">
+                <FileText className="h-4 w-4" /> Résumé
+              </a>
+            </Button>
+
+            <Button
+                className="gap-2 px-6 bg-[hsl(var(--primary))]
+                       text-[hsl(var(--primary-foreground))] hover:opacity-90"
+                asChild
+            >
+              <a href={links.mail}>
+                <MessageCircle className="h-4 w-4" />
+                Let's Talk
+              </a>
+            </Button>
+          </div>
+
+          {/* social icons */}
+          <div className="mt-12 flex justify-center gap-8 text-2xl fg-subtle">
+            <a className="hover:fg-base transition-colors" aria-label="GitHub"    href={links.github}><SiGithub /></a>
+            <a className="hover:fg-base transition-colors" aria-label="LinkedIn"  href={links.linkedin}><SiLinkedin /></a>
+            <a className="hover:fg-base transition-colors" aria-label="Instagram" href={links.instagram}><SiInstagram /></a>
+            <a className="hover:fg-base transition-colors" aria-label="Email"     href={links.mail}>
+              <svg viewBox="0 0 20 20" fill="currentColor" className="h-[1.3rem] w-[1.3rem]">
+                <path d="M2 4a2 2 0 012-2h12a2 2 0 012 2v.217l-10 5.555L2 4.217V4z"/>
+                <path d="M18 8.118l-8 4.445-8-4.445V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+              </svg>
+            </a>
+          </div>
+
+          {/* shortcut hint */}
+          <p className="mt-14 text-xs fg-faint">
+            Press <kbd className="kbd">R</kbd> for résumé · <kbd className="kbd">G</kbd> for GitHub
+          </p>
+        </div>
+      </section>
+  );
+}
