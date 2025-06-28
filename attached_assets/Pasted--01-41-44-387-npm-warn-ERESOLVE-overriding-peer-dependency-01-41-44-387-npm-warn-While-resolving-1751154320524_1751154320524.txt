@@ -1,0 +1,40 @@
+[01:41:44.387] npm warn ERESOLVE overriding peer dependency
+[01:41:44.387] npm warn While resolving: react-reconciler@0.32.0
+[01:41:44.388] npm warn Found: react@18.3.1
+[01:41:44.388] npm warn node_modules/react
+[01:41:44.388] npm warn   react@"^18.3.1" from the root project
+[01:41:44.388] npm warn   99 more (@floating-ui/react-dom, @hello-pangea/dnd, ...)
+[01:41:44.388] npm warn
+[01:41:44.388] npm warn Could not resolve dependency:
+[01:41:44.388] npm warn peer react@"^19.1.0" from react-reconciler@0.32.0
+[01:41:44.388] npm warn node_modules/react-konva/node_modules/react-reconciler
+[01:41:44.389] npm warn   react-reconciler@"0.32.0" from react-konva@19.0.6
+[01:41:44.389] npm warn   node_modules/react-konva
+[01:41:44.389] npm warn
+[01:41:44.389] npm warn Conflicting peer dependency: react@19.1.0
+[01:41:44.389] npm warn node_modules/react
+[01:41:44.389] npm warn   peer react@"^19.1.0" from react-reconciler@0.32.0
+[01:41:44.390] npm warn   node_modules/react-konva/node_modules/react-reconciler
+[01:41:44.390] npm warn     react-reconciler@"0.32.0" from react-konva@19.0.6
+[01:41:44.390] npm warn     node_modules/react-konva
+[01:41:46.600] npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+[01:41:47.242] npm warn deprecated npmlog@5.0.1: This package is no longer supported.
+[01:41:47.817] npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+[01:41:48.296] npm warn deprecated gauge@3.0.2: This package is no longer supported.
+[01:41:48.325] npm warn deprecated domexception@4.0.0: Use your platform's native DOMException instead
+[01:41:48.620] npm warn deprecated are-we-there-yet@2.0.0: This package is no longer supported.
+[01:41:48.697] npm warn deprecated abab@2.0.6: Use your platform's native atob() and btoa() methods instead
+[01:41:49.717] npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+[01:41:49.772] npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+[01:41:49.964] npm warn deprecated rimraf@2.7.1: Rimraf versions prior to v4 are no longer supported
+[01:41:49.965] npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+[01:41:50.135] npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+[01:41:51.168] npm warn deprecated three-mesh-bvh@0.7.8: Deprecated due to three.js version incompatibility. Please use v0.8.0, instead.
+[01:42:09.679] 
+[01:42:09.680] added 760 packages in 27s
+[01:42:09.680] 
+[01:42:09.680] 83 packages are looking for funding
+[01:42:09.680]   run `npm fund` for details
+[01:42:09.982] Using TypeScript 5.6.3 (local user-provided)
+[01:42:25.878] Build Completed in /vercel/output [43s]
+[01:42:26.075] Deploying outputs...
