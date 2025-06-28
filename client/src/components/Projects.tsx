@@ -1,192 +1,360 @@
-import { useState, useEffect } from 'react';
-import { Search, ExternalLink } from 'lucide-react';
+/* ------------------------------------------------------------------
+   ProjectsEnhanced.tsx  – image banners + full filter UI
+------------------------------------------------------------------- */
+import { useState, useEffect, useRef, useMemo } from "react";
+import { Search, Filter, ChevronDown, ExternalLink } from "lucide-react";
+import {
+  projects,                // make sure each project has .image (string) now
+  technologies,
+  categoryOptions,
+  typeOptions,
+} from "@/data/portfolio";
+import { createAnimationObserver } from "@/lib/animations";
 
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  tech: string[];
-  image: string;
-  liveUrl?: string;
+interface ProjectFilters {
+  search: string;
+  technology: string[];
+  category: string[];
+  type: string[];
 }
 
-const projects: Project[] = [
-  {
-    id: 'component-forge',
-    title: 'Component Forge',
-    description: 'Live React-HTML component builder with drag & drop interface, CSS tokens, and one-click Figma import functionality.',
-    category: 'Development Tools',
-    tech: ['React', 'Three.js', 'Tailwind', 'TypeScript'],
-    image: 'https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=675',
-    liveUrl: 'https://pixel-component-craft.vercel.app/',
-  },
-  {
-    id: '3d-configurator',
-    title: '3-D Product Configurator',
-    description: 'Interactive 3D product configurator that increased conversions by 35% and handles 50K configurations monthly.',
-    category: 'E-commerce',
-    tech: ['WebGL', 'Spline', 'Redis', 'GraphQL'],
-    image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=675',
-  },
-  {
-    id: 'data-viz',
-    title: 'Data-Visualisation Engine',
-    description: 'Real-time data visualization engine that streams 1M data points with less than 50ms latency.',
-    category: 'Analytics',
-    tech: ['D3.js', 'WebGL', 'Socket.io'],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=675',
-  },
-  {
-    id: 'booking-platform',
-    title: 'On-Demand Booking Platform',
-    description: 'Real-time booking platform with dynamic slot management and sub-100ms latency for instant availability updates.',
-    category: 'SaaS',
-    tech: ['Socket.io', 'PostgreSQL', 'Docker'],
-    image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=675',
-  },
-  {
-    id: 'etl-pipelines',
-    title: 'Serverless ETL Pipelines',
-    description: 'Serverless ETL system processing 5TB daily from gzip to Parquet format with Redshift integration in under 10 minutes.',
-    category: 'Infrastructure',
-    tech: ['AWS Step Fn', 'Lambda', 'Athena'],
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=675',
-  },
-  {
-    id: 'ai-medical',
-    title: 'AI in Medicine Platform',
-    description: 'Medical AI platform using CNN with 0.92 AUC for diagnostics, integrating robotics and nanotechnology research.',
-    category: 'AI/ML',
-    tech: ['TensorFlow', 'Python', 'PyTorch'],
-    image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&h=675',
-  },
-];
+export default function ProjectsEnhanced() {
+  /* ───────────────────────────── state & refs ────────────────────────────── */
+  const [filters, setFilters] = useState<ProjectFilters>({
+    search: "",
+    technology: [],
+    category: [],
+    type: [],
+  });
+  const [expanded, setExpanded] = useState({
+    technology: false,
+    category: false,
+    type: false,
+  });
+  const searchRef = useRef<HTMLInputElement>(null);
 
-const chipColors: Record<string, string> = {
-  'Development Tools': 'chip-blue',
-  'E-commerce': 'chip-fuchsia',
-  'Analytics': 'chip-cyan',
-  'SaaS': 'chip-lime',
-  'Infrastructure': 'chip-amber',
-  'AI/ML': 'chip-cyan',
-};
-
-export default function Projects() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filteredProjects, setFilteredProjects] = useState(projects);
-
+  /* ───────────────────────────── animations init ─────────────────────────── */
   useEffect(() => {
-    const filtered = projects.filter(project => {
-      const searchTerm = searchQuery.toLowerCase();
-      return (
-        project.title.toLowerCase().includes(searchTerm) ||
-        project.description.toLowerCase().includes(searchTerm) ||
-        project.category.toLowerCase().includes(searchTerm) ||
-        project.tech.some(tech => tech.toLowerCase().includes(searchTerm))
-      );
-    });
-    setFilteredProjects(filtered);
-  }, [searchQuery]);
+    const obs = createAnimationObserver(
+        ".project-card",
+        "project-card-entered",
+        { threshold: 0.05, rootMargin: "50px" }
+    );
+    return () => obs.disconnect();
+  }, []);
 
-  const clearSearch = () => setSearchQuery('');
+  /* ───────────────────────────── filtering logic ─────────────────────────── */
+  const filtered = useMemo(() => {
+    return projects.filter((p) => {
+      /* search text */
+      if (filters.search) {
+        const q = filters.search.toLowerCase();
+        const hit =
+            p.name.toLowerCase().includes(q) ||
+            p.description.toLowerCase().includes(q) ||
+            p.technologies.some((t) => t.toLowerCase().includes(q));
+        if (!hit) return false;
+      }
+      /* tech chips */
+      if (
+          filters.technology.length &&
+          !filters.technology.some((t) => p.technologies.includes(t))
+      )
+        return false;
+      /* category */
+      if (filters.category.length && !filters.category.includes(p.category))
+        return false;
+      /* type */
+      if (filters.type.length && !filters.type.includes(p.type)) return false;
+
+      return true;
+    });
+  }, [filters]);
+
+  /* ───────────────────────────── tiny helpers ────────────────────────────── */
+  const flip = (k: keyof typeof expanded) =>
+      setExpanded((s) => ({ ...s, [k]: !s[k] }));
+  const toggle = (k: keyof Omit<ProjectFilters, "search">, v: string) =>
+      setFilters((f) => ({
+        ...f,
+        [k]: f[k].includes(v) ? f[k].filter((x) => x !== v) : [...f[k], v],
+      }));
+  const clear = () => {
+    setFilters({ search: "", technology: [], category: [], type: [] });
+    searchRef.current && (searchRef.current.value = "");
+  };
+
+  const activeCount =
+      filters.technology.length +
+      filters.category.length +
+      filters.type.length +
+      (filters.search ? 1 : 0);
+
+  /* ───────────────────────────── ui starts here ──────────────────────────── */
+  return (
+      <section id="projects" className="py-12 md:py-16 lg:py-20 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
+        {/* heading */}
+        <header className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold fg-base mb-4 fade-in-up">
+            <span className="shimmer-text">Projects</span>
+          </h2>
+          <p className="text-xl fg-faint fade-in-up delay-150">
+            Explore my work across different domains
+          </p>
+        </header>
+
+        {/* search + filter */}
+        <div className="mb-10 space-y-4">
+          {/* search bar */}
+          <div className="relative fade-in-up delay-225 group">
+            <Search
+                className="absolute left-4 top-1/2 -translate-y-1/2 fg-faint group-focus-within:text-[hsl(var(--accent-from))] transition-colors duration-300"
+                size={20}
+            />
+            <input
+                ref={searchRef}
+                type="text"
+                placeholder="Search projects, technologies…"
+                className="w-full pl-12 pr-4 py-3 rounded-lg bg-[hsl(var(--bg-surface)/.6)] border border-[hsl(var(--border-color))] fg-base placeholder:fg-faint 
+                         focus:outline-none focus:border-[hsl(var(--accent-from))] focus:ring-2 focus:ring-[hsl(var(--ring-color))] 
+                         focus:bg-[hsl(var(--bg-surface)/.8)] transition-all duration-300 hover-lift"
+                onChange={(e) =>
+                    setFilters((f) => ({ ...f, search: e.target.value }))
+                }
+            />
+          </div>
+
+          {/* collapsible filter panels */}
+          <FilterPanel
+              label="Technologies"
+              color="indigo"
+              count={filters.technology.length}
+              open={expanded.technology}
+              onToggle={() => flip("technology")}
+          >
+            <CheckboxGrid
+                options={technologies}
+                checked={filters.technology}
+                onChange={(v) => toggle("technology", v)}
+            />
+          </FilterPanel>
+
+          <FilterPanel
+              label="Categories"
+              color="purple"
+              count={filters.category.length}
+              open={expanded.category}
+              onToggle={() => flip("category")}
+          >
+            <CheckboxGrid
+                options={categoryOptions}
+                checked={filters.category}
+                onChange={(v) => toggle("category", v)}
+            />
+          </FilterPanel>
+        </div>
+
+        {/* active-filter summary */}
+        {activeCount > 0 && (
+            <div className="flex items-center justify-between mb-6">
+              <p className="text-sm fg-faint">
+                {filtered.length} / {projects.length} shown
+              </p>
+              <button
+                  onClick={clear}
+                  className="text-sm text-[hsl(var(--accent-from))] hover:text-[hsl(var(--accent-to))] transition"
+              >
+                Clear all
+              </button>
+            </div>
+        )}
+
+        {/* project grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filtered.map((p, i) => (
+              <article
+                  key={p.id}
+                  className="project-card group relative rounded-xl border border-[hsl(var(--border-color))] bg-[hsl(var(--bg-surface)/.6)] 
+                           overflow-hidden transition-all duration-500 hover-lift
+                           hover:border-[hsl(var(--accent-from))] hover:shadow-2xl hover:shadow-[hsl(var(--black-900)/.55)]"
+                  style={{ animationDelay: `${i * 60}ms` }}
+              >
+                {/* Premium hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[hsl(var(--accent-from)/.15)] to-transparent opacity-0 
+                             group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10" />
+                
+                {/* image banner with zoom effect */}
+                <div className="relative overflow-hidden">
+                  {p.image ? (
+                      <img
+                          src={p.image}
+                          alt={p.name}
+                          loading="lazy"
+                          className="w-full aspect-[16/9] object-cover object-center 
+                                   transform transition-all duration-700 
+                                   group-hover:scale-110 group-hover:rotate-1"
+                      />
+                  ) : (
+                      <div className="w-full aspect-[16/9] bg-gradient-to-br from-[hsl(var(--bg-elevated))] to-[hsl(var(--bg-surface)/.6)] 
+                                    relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent 
+                                      -translate-x-full group-hover:translate-x-full transition-transform duration-1500" />
+                      </div>
+                  )}
+                </div>
+
+                {/* content */}
+                <div className="p-6 space-y-4 relative z-20">
+                  <header className="flex justify-between items-start">
+                    <h3 className="text-xl font-bold fg-base group-hover:text-[hsl(var(--accent-from))] 
+                               transition-all duration-300 group-hover:translate-x-1">
+                      {p.name}
+                    </h3>
+                    {p.liveUrl && (
+                        <a
+                            href={p.liveUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="fg-faint hover:text-[hsl(var(--accent-from))] transition-all duration-300
+                                     hover:scale-110 hover:rotate-12"
+                            title="View live"
+                        >
+                          <ExternalLink size={18} />
+                        </a>
+                    )}
+                  </header>
+
+                  {p.category && (
+                      <span className="chip chip-blue inline-block hover:scale-105 transition-transform duration-300">
+                        {p.category}
+                      </span>
+                  )}
+
+                  <p className="fg-subtle line-clamp-3 group-hover:fg-base transition-colors duration-500">
+                    {p.description}
+                  </p>
+
+                  {/* tech pills with stagger animation */}
+                  <div className="flex flex-wrap gap-2">
+                    {p.technologies.slice(0, 4).map((t, index) => {
+                      const chipColors = ['chip-blue', 'chip-lime', 'chip-amber', 'chip-fuchsia', 'chip-cyan'];
+                      const colorClass = chipColors[index % chipColors.length];
+                      return (
+                        <span
+                            key={t}
+                            className={`chip ${colorClass}`}
+                        >
+                    {t}
+                  </span>
+                      );
+                    })}
+                    {p.technologies.length > 4 && (
+                        <span className="text-[11px] px-2 py-1 fg-faint">
+                    +{p.technologies.length - 4}
+                  </span>
+                    )}
+                  </div>
+                </div>
+
+                {/* subtle overlay on hover */}
+                <span className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[hsl(var(--brand-sky)/0)] via-transparent to-[hsl(var(--brand-fuchsia)/0)] group-hover:from-[hsl(var(--brand-sky)/.08)] group-hover:to-[hsl(var(--brand-fuchsia)/.08)] transition opacity-0 group-hover:opacity-100" />
+              </article>
+          ))}
+        </div>
+
+        {/* empty-state */}
+        {filtered.length === 0 && (
+            <div className="text-center py-20">
+              <p className="fg-faint mb-4">No projects match your filters.</p>
+              <button
+                  onClick={clear}
+                  className="text-[hsl(var(--accent-from))] hover:text-[hsl(var(--accent-to))] transition"
+              >
+                Reset filters
+              </button>
+            </div>
+        )}
+      </section>
+  );
+}
+
+/* ————————————————————— tiny composables ——————————————————————— */
+function FilterPanel({
+                       children,
+                       label,
+                       color,
+                       count,
+                       open,
+                       onToggle,
+                     }: {
+  children: React.ReactNode;
+  label: string;
+  color: "indigo" | "purple";
+  count: number;
+  open: boolean;
+  onToggle: () => void;
+}) {
+  const colorClasses = {
+    indigo: "bg-indigo-500/10 text-indigo-300 border-indigo-500/20",
+    purple: "bg-purple-500/10 text-purple-300 border-purple-500/20",
+  };
 
   return (
-    <section id="projects" className="py-12 md:py-16 lg:py-20 px-4 md:px-8 lg:px-16 max-w-7xl mx-auto">
-      {/* Header */}
-      <header className="text-center mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 animate-fade-up">
-          <span className="shimmer-text">Projects</span>
-        </h2>
-        <p className="text-xl text-[var(--fg-faint)] animate-fade-up delay-150">
-          Explore my work across different domains
-        </p>
-      </header>
-
-      {/* Search */}
-      <div className="mb-10">
-        <div className="relative animate-fade-up delay-225 group">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--fg-faint)] group-focus-within:text-[var(--brand-sky)] transition-colors duration-300 w-5 h-5" />
-          <input
-            type="text"
-            placeholder="Search projects, technologies…"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-12 pr-4 py-3 rounded-lg bg-[hsl(var(--black-700)/0.6)] border border-[var(--border-color)] text-white placeholder:text-[var(--fg-faint)] focus:outline-none focus:border-[var(--brand-sky)] focus:ring-2 focus:ring-[hsl(var(--brand-sky)/0.6)] focus:bg-[hsl(var(--black-700)/0.8)] transition-all duration-300 hover-lift"
+      <div className="border border-[hsl(var(--border-color))] rounded-lg bg-[hsl(var(--bg-surface)/.4)] overflow-hidden">
+        <button
+            onClick={onToggle}
+            className="w-full px-4 py-3 flex items-center justify-between hover:bg-[hsl(var(--bg-surface)/.6)] transition-colors"
+        >
+          <div className="flex items-center gap-3">
+            <Filter size={16} className="fg-faint" />
+            <span className="font-medium fg-base">{label}</span>
+            {count > 0 && (
+                <span className={`px-2 py-1 rounded-full text-xs font-medium ${colorClasses[color]}`}>
+            {count}
+          </span>
+            )}
+          </div>
+          <ChevronDown
+              className={`fg-faint transition-transform duration-200 ${
+                  open ? "rotate-180" : ""
+              }`}
+              size={16}
           />
-        </div>
+        </button>
+        {open && (
+            <div className="px-4 pb-4 border-t border-[hsl(var(--border-color)/.5)]">
+              {children}
+            </div>
+        )}
       </div>
+  );
+}
 
-      {/* Project Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredProjects.map((project, index) => (
-          <article 
-            key={project.id} 
-            className="project-card relative rounded-xl border border-[var(--border-color)] bg-[hsl(var(--black-700)/0.6)] overflow-hidden transition-all duration-500 hover-lift hover:border-[var(--brand-sky)] hover:shadow-2xl hover:shadow-[rgba(0,0,0,0.55)] group"
-            style={{ animationDelay: `${index * 100}ms` }}
-          >
-            {/* Image Banner */}
-            <div className="relative overflow-hidden">
-              <img
-                src={project.image}
-                alt={project.title}
-                loading="lazy"
-                className="w-full aspect-[16/9] object-cover object-center transform transition-all duration-700 group-hover:scale-110 group-hover:rotate-1"
+function CheckboxGrid({
+                        options,
+                        checked,
+                        onChange,
+                      }: {
+  options: string[];
+  checked: string[];
+  onChange: (value: string) => void;
+}) {
+  return (
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 pt-3">
+        {options.map((option) => (
+            <label
+                key={option}
+                className="flex items-center gap-2 cursor-pointer hover:bg-[hsl(var(--bg-surface)/.6)] p-2 rounded transition-colors"
+            >
+              <input
+                  type="checkbox"
+                  checked={checked.includes(option)}
+                  onChange={() => onChange(option)}
+                  className="rounded border-[hsl(var(--border-color))] bg-transparent focus:ring-[hsl(var(--accent-from))] focus:ring-offset-0"
               />
-            </div>
-            
-            {/* Content */}
-            <div className="p-6 space-y-4 relative z-20">
-              <header className="flex justify-between items-start">
-                <h3 className="text-xl font-bold text-white group-hover:text-[var(--brand-sky)] transition-all duration-300 group-hover:translate-x-1">
-                  {project.title}
-                </h3>
-                {project.liveUrl && (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[var(--fg-faint)] hover:text-[var(--brand-sky)] transition-all duration-300 hover:scale-110 hover:rotate-12"
-                    title="View live"
-                  >
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
-                )}
-              </header>
-
-              <span className={`chip ${chipColors[project.category]} inline-block hover:scale-105 transition-transform duration-300`}>
-                {project.category}
-              </span>
-
-              <p className="text-[var(--fg-subtle)] line-clamp-3 group-hover:text-[var(--fg)] transition-colors duration-500">
-                {project.description}
-              </p>
-
-              {/* Tech Pills */}
-              <div className="flex flex-wrap gap-2">
-                {project.tech.map((tech) => (
-                  <span key={tech} className="chip chip-blue">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </article>
+              <span className="text-sm fg-base truncate">{option}</span>
+            </label>
         ))}
       </div>
-
-      {/* Empty State */}
-      {filteredProjects.length === 0 && searchQuery && (
-        <div className="text-center py-20">
-          <p className="text-[var(--fg-faint)] mb-4">No projects match your search.</p>
-          <button
-            onClick={clearSearch}
-            className="text-[var(--brand-sky)] hover:text-[var(--brand-fuchsia)] transition"
-          >
-            Clear search
-          </button>
-        </div>
-      )}
-    </section>
   );
 }

@@ -1,3 +1,4 @@
+/* StickyNav.tsx - Professional sticky navigation with smooth scrolling */
 import { useState, useEffect } from 'react';
 import { Home, Briefcase, Code, FolderOpen, Mail } from 'lucide-react';
 

@@ -1,126 +1,169 @@
+/* ────────────────────────────────────────────────────────────
+   Skills.tsx · "ultimate" polished showcase board
+   Pure React + Tailwind
+   Icons: @icons-pack/react-simple-icons + emoji fall-backs
+   Last updated 2025-06-28
+──────────────────────────────────────────────────────────── */
+
 import { FC, useEffect, useRef, useState } from "react";
 import type { SVGProps } from "react";
+import type { IconType } from "@icons-pack/react-simple-icons";
 
-// Emoji fallback icons
+/* —— Simple-Icons imports —— */
+import {
+  /* Web */
+  SiHtml5,
+  SiCss,
+  SiJavascript,
+  SiTypescript,
+  SiReact,
+  SiVuedotjs,
+  SiNextdotjs,
+  SiTailwindcss,
+  SiWebflow,
+  /* Databases */
+  SiMysql,
+  SiPostgresql,
+  SiMongodb,
+  SiRedis,
+  SiSqlite,
+  SiSupabase,
+  /* AI & ML */
+  SiTensorflow,
+  SiPytorch,
+  SiOpenai,
+  SiHuggingface,
+  /* Commerce / CMS */
+  SiShopify,
+  SiWordpress,
+  SiStripe,
+  SiWoocommerce,
+  /* Languages / Kernel */
+  SiPython,
+  SiC,
+  SiCplusplus,
+  SiLinux,
+  SiKubernetes,
+  SiRust,
+  /* Tools */
+  SiGit,
+  SiGithub,
+  SiDocker,
+  SiPostman,
+  SiJira,
+  SiFigma,
+  SiEslint,
+  SiPrettier,
+  SiNpm,
+} from "@icons-pack/react-simple-icons";
+
+/* —— emoji fall-backs —— */
 type EmojiIcon = FC<SVGProps<SVGSVGElement> & { size?: number }>;
 
-const WebIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>🌐</span>
-);
-const CSSIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>🎨</span>
-);
-const JSIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>⚡</span>
-);
-const TSIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>📘</span>
-);
-const ReactIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>⚛️</span>
-);
-const VueIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>💚</span>
-);
-const NextIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>▲</span>
-);
-const TailwindIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>🌊</span>
-);
-
-const MySQLIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>🗄️</span>
-);
-const PostgreSQLIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>🐘</span>
-);
-const MongoIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>🍃</span>
-);
-const RedisIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>🔴</span>
-);
-const SQLiteIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>💾</span>
-);
-const SupabaseIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>⚡</span>
-);
-
-const PythonIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>🐍</span>
-);
 const JavaIcon: EmojiIcon = ({ size = 32, className }) => (
     <span style={{ fontSize: size }} className={className}>☕</span>
-);
-const CIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>🔧</span>
-);
-const RustIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>🦀</span>
-);
-
-const GitIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>📚</span>
-);
-const DockerIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>🐳</span>
 );
 const VSCodeIcon: EmojiIcon = ({ size = 32, className }) => (
     <span style={{ fontSize: size }} className={className}>🛠️</span>
 );
-const FigmaIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>🎨</span>
+const JetBrainsIcon: EmojiIcon = ({ size = 32, className }) => (
+    <span style={{ fontSize: size }} className={className}>⚙️</span>
 );
 
-interface Skill  { label: string; Icon: EmojiIcon }
+/* —— icon union type —— */
+type SkillIcon = IconType | EmojiIcon;
+
+/* —— data model —— */
+interface Skill  { label: string; Icon: SkillIcon }
 interface Column { title: string; items: Skill[]  }
 
+/* —— 2-row board data (Web = 4×2) —— */
 const columns: Column[] = [
   {
     title: "Web",
     items: [
-      { label: "HTML5",        Icon: WebIcon },
-      { label: "CSS3",         Icon: CSSIcon },
-      { label: "JavaScript",   Icon: JSIcon },
-      { label: "TypeScript",   Icon: TSIcon },
-      { label: "React",        Icon: ReactIcon },
-      { label: "Vue.js",       Icon: VueIcon },
-      { label: "Next.js",      Icon: NextIcon },
-      { label: "Tailwind",     Icon: TailwindIcon },
+      { label: "HTML5",        Icon: SiHtml5 },
+      { label: "CSS3",         Icon: SiCss },
+      { label: "JavaScript",   Icon: SiJavascript },
+      { label: "TypeScript",   Icon: SiTypescript },
+      { label: "React",        Icon: SiReact },
+      { label: "Vue.js",       Icon: SiVuedotjs },
+      { label: "Next.js",      Icon: SiNextdotjs },
+      { label: "Tailwind CSS", Icon: SiTailwindcss },
     ],
   },
   {
     title: "Database",
     items: [
-      { label: "MySQL",      Icon: MySQLIcon },
-      { label: "PostgreSQL", Icon: PostgreSQLIcon },
-      { label: "MongoDB",    Icon: MongoIcon },
-      { label: "Redis",      Icon: RedisIcon },
-      { label: "SQLite",     Icon: SQLiteIcon },
-      { label: "Supabase",   Icon: SupabaseIcon },
+      { label: "MySQL",      Icon: SiMysql },
+      { label: "PostgreSQL", Icon: SiPostgresql },
+      { label: "MongoDB",    Icon: SiMongodb },
+      { label: "Redis",      Icon: SiRedis },
+      { label: "SQLite",     Icon: SiSqlite },
+      { label: "Supabase",   Icon: SiSupabase },
+    ],
+  },
+  {
+    title: "AI & ML",
+    items: [
+      { label: "TensorFlow",   Icon: SiTensorflow },
+      { label: "PyTorch",      Icon: SiPytorch },
+      { label: "OpenAI",       Icon: SiOpenai },
+      { label: "Hugging Face", Icon: SiHuggingface },
+    ],
+  },
+  {
+    title: "Commerce",
+    items: [
+      { label: "Shopify",     Icon: SiShopify },
+      { label: "WordPress",   Icon: SiWordpress },
+      { label: "Stripe",      Icon: SiStripe },
+      { label: "WooCommerce", Icon: SiWoocommerce },
     ],
   },
   {
     title: "Languages",
     items: [
-      { label: "Python",     Icon: PythonIcon },
+      { label: "TypeScript", Icon: SiTypescript },
+      { label: "Python",     Icon: SiPython },
       { label: "Java",       Icon: JavaIcon },
-      { label: "C",          Icon: CIcon },
-      { label: "Rust",       Icon: RustIcon },
+      { label: "Rust",       Icon: SiRust },
+    ],
+  },
+  {
+    title: "C & Kernel",
+    items: [
+      { label: "C",          Icon: SiC },
+      { label: "C++",        Icon: SiCplusplus },
+      { label: "Linux",      Icon: SiLinux },
+      { label: "Kubernetes", Icon: SiKubernetes },
     ],
   },
   {
     title: "Tools",
     items: [
-      { label: "Git",      Icon: GitIcon },
-      { label: "Docker",   Icon: DockerIcon },
       { label: "VS Code",  Icon: VSCodeIcon },
-      { label: "Figma",    Icon: FigmaIcon },
+      { label: "Git",      Icon: SiGit },
+      { label: "GitHub",   Icon: SiGithub },
+      { label: "Docker",   Icon: SiDocker },
+      { label: "Postman",  Icon: SiPostman },
+      { label: "Jira",     Icon: SiJira },
+      { label: "Figma",    Icon: SiFigma },
+      { label: "ESLint",   Icon: SiEslint },
+      { label: "Prettier", Icon: SiPrettier },
+      { label: "NPM",      Icon: SiNpm },
+    ],
+  },
+  {
+    title: "Other",
+    items: [
+      { label: "Webflow",    Icon: SiWebflow },
+      { label: "JetBrains",  Icon: JetBrainsIcon },
     ],
   },
 ];
+
+/* ══════════════════════════════════════════════════════════ */
 
 export default function Skills() {
   const sectionRef = useRef<HTMLElement|null>(null);
@@ -137,14 +180,17 @@ export default function Skills() {
 
   return (
       <section
-          ref={sectionRef}
           id="skills"
-          className="py-12 md:py-16 lg:py-20 px-6 md:px-10 lg:px-16 max-w-screen-xl mx-auto"
+          ref={sectionRef}
+          className="py-12 md:py-16 lg:py-20 px-6 md:px-10 lg:px-16
+                 max-w-screen-xl mx-auto"
       >
-        <h2 className="text-center text-4xl md:text-5xl font-serif font-bold mb-12 md:mb-16 text-white">
-          <span className="shimmer-text">Skills</span>
+        <h2 className="text-center text-4xl md:text-5xl font-serif font-bold
+                     mb-12 md:mb-16">
+          Skills
         </h2>
 
+        {/* two balanced rows of 4 columns */}
         <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-x-10 gap-y-16">
           {columns.map((col, cIdx) => (
               <div
@@ -154,7 +200,7 @@ export default function Skills() {
                   }`}
                   style={{ animationDelay: `${cIdx * 80}ms` }}
               >
-                <h3 className="mb-7 text-lg md:text-xl font-semibold text-white">
+                <h3 className="mb-7 text-lg md:text-xl font-semibold">
                   {col.title}
                 </h3>
 

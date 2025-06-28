@@ -5,15 +5,16 @@ import { useEffect } from "react";
 import { FileText, MessageCircle, MapPin } from "lucide-react";
 import { SiGithub, SiLinkedin, SiInstagram } from "react-icons/si";
 import { Button } from "@/components/ui/button";
+import { personalInfo } from "@/data/portfolio";
 
 /* hard-coded links so they always resolve even if personalInfo.ts
    isn't updated yet  */
 const links = {
   resume:    "/resume.pdf",
-  github:    "https://github.com/petar-nikolic125/",
-  linkedin:  "https://www.linkedin.com/in/petar-nikolic-957875345/",
-  instagram: "https://instagram.com/nfs.u.2",
-  mail:      "mailto:petar.nikolic.04.7@gmail.com",
+  github:    personalInfo.social.github,
+  linkedin:  personalInfo.social.linkedin,
+  instagram: personalInfo.social.instagram,
+  mail:      `mailto:${personalInfo.social.email}`,
 };
 
 export default function HeroEnhanced() {
@@ -38,7 +39,7 @@ export default function HeroEnhanced() {
                      text-[clamp(3.5rem,9vw,6rem)] leading-none tracking-tight
                      fg-base"
           >
-            Petar&nbsp;Nikolić
+            {personalInfo.name}
             {/* moving highlight */}
             <span className="shine" />
           </h1>
@@ -46,18 +47,18 @@ export default function HeroEnhanced() {
           {/* title */}
           <h2 className="mt-4 font-serif italic fg-subtle
                        text-[clamp(2rem,4vw,2.75rem)] tracking-wider">
-            Software Engineer
+            {personalInfo.title}
           </h2>
 
           {/* tagline */}
           <p className="mt-6 mx-auto max-w-xl fg-faint text-lg font-light">
-            Full-stack, distributed systems, real-time data
+            {personalInfo.subtitle}
           </p>
 
           {/* location */}
           <p className="mt-8 inline-flex items-center gap-2 text-xs uppercase tracking-widest fg-faint">
             <MapPin className="h-3.5 w-3.5" />
-            Belgrade, Serbia • open to remote (EU &amp; US time zones)
+            {personalInfo.location}
           </p>
 
           {/* CTA buttons */}
