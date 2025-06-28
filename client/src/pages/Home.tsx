@@ -4,7 +4,6 @@ import StickyNav from '@/components/StickyNav';
 import WorkEducationEnhanced from '@/components/WorkEducationEnhanced';
 import Skills from '@/components/Skills';
 import Projects from '@/components/Projects';
-import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -28,7 +27,6 @@ export default function Home() {
       <WorkEducationEnhanced />
       <Skills />
       <Projects />
-      <Contact />
       <Footer />
     </div>
   );

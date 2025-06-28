@@ -90,7 +90,8 @@ function MetricChip({ label, delay }: { label: string; delay: number }) {
   return (
     <span
       ref={ref}
-      className="inline-flex items-center gap-1 px-3 py-1 bg-blue-500/10 text-blue-300 rounded-full text-sm font-medium border border-blue-500/20 opacity-0"
+      className="inline-flex items-center gap-1 px-3 py-1 bg-blue-500/10 text-blue-300 rounded-full text-sm font-medium border border-blue-500/20 animate-fade-in-up"
+      style={{ animationDelay: `${delay}ms` }}
     >
       <TrendingUp size={12} />
       {label}
@@ -113,7 +114,7 @@ function WorkCard({ item, index }: { item: WorkItem; index: number }) {
   return (
     <div
       ref={cardRef}
-      className="relative p-6 bg-gray-800/50 rounded-xl border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 group opacity-0 transform translate-x-[-50px]"
+      className="relative p-6 bg-gray-800/50 rounded-xl border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 group animate-slide-in-left"
     >
       {/* Ribbon */}
       {item.ribbon && (
@@ -185,7 +186,7 @@ function EduCard({ item, index }: { item: EduItem; index: number }) {
   return (
     <div
       ref={cardRef}
-      className="relative p-6 bg-gray-800/50 rounded-xl border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 group opacity-0 transform translate-x-[50px]"
+      className="relative p-6 bg-gray-800/50 rounded-xl border border-gray-700/50 hover:border-gray-600/50 transition-all duration-300 group animate-slide-in-right"
     >
       {/* Ribbon */}
       {item.ribbon && (
@@ -304,7 +305,7 @@ export default function WorkEducationEnhanced() {
     <section
       id="experience"
       ref={sectionRef}
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-950 opacity-0"
+      className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-950 transition-opacity duration-700"
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
