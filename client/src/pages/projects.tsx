@@ -41,10 +41,10 @@ export default function Projects() {
                 filters.technology.some(tech => project.technologies.includes(tech));
 
             const matchesAvailability = filters.availability.length === 0 ||
-                filters.availability.includes(project.availability);
+                (project.availability && filters.availability.includes(project.availability));
 
             const matchesType = filters.type.length === 0 ||
-                filters.type.includes(project.type);
+                (project.type && filters.type.includes(project.type));
 
             const matchesCategory = filters.category.length === 0 ||
                 (project.category && filters.category.includes(project.category));

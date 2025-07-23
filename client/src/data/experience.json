@@ -109,9 +109,8 @@
       "heading": "Operating Systems",
       "subHeading": "Paging • Schedulers • IPC",
       "emoji": "🖥️",
-      "docUrl":  "/projects/xv6_extensions.pdf",
-      "repoUrl": "https://github.com/petar-nikolic125/Multithreaded-Word-Finder",
-      "detailUrl": "/projects/word-finder"
+      "detailUrl": "/projects/multithreaded-word-finder",
+      "repoUrl": "https://github.com/petar-nikolic125/Multithreaded-Word-Finder"
     },
     {
       "id": "e-networks",

@@ -1,6 +1,7 @@
 // src/components/ProjectsEnhanced.tsx
 import React, { useState, useRef, useMemo } from "react";
 import { Search, Filter, ChevronDown, ExternalLink } from "lucide-react";
+import { Link } from "wouter";
 import {
     projects,
     technologies,
@@ -48,10 +49,10 @@ export default function ProjectsEnhanced(): JSX.Element {
                 )
                     return false;
                 // 3) category
-                if (filters.category.length && !filters.category.includes(p.category))
+                if (filters.category.length && p.category && !filters.category.includes(p.category))
                     return false;
                 // 4) type
-                if (filters.type.length && !filters.type.includes(p.type)) return false;
+                if (filters.type.length && p.type && !filters.type.includes(p.type)) return false;
 
                 return true;
             }),
@@ -197,12 +198,13 @@ export default function ProjectsEnhanced(): JSX.Element {
             >
                 {filtered.map((p, i) => (
                     <li key={p.id}>
-                        <article
-                            tabIndex={0}
-                            aria-labelledby={`proj-${p.id}-title`}
-                            className="group relative rounded-xl border bg-[hsl(var(--bg-surface)/.6)] hover-lift transition-all focus:outline focus:ring-2"
-                            style={{ animationDelay: `${i * 60}ms` }}
-                        >
+                        <Link href={`/projects/${p.slug || p.id}`}>
+                            <article
+                                tabIndex={0}
+                                aria-labelledby={`proj-${p.id}-title`}
+                                className="group relative rounded-xl border bg-[hsl(var(--bg-surface)/.6)] hover-lift transition-all focus:outline focus:ring-2 cursor-pointer"
+                                style={{ animationDelay: `${i * 60}ms` }}
+                            >
                             {/* image */}
                             <div className="relative overflow-hidden">
                                 <img
@@ -220,15 +222,12 @@ export default function ProjectsEnhanced(): JSX.Element {
                                         {p.name}
                                     </h3>
                                     {p.liveUrl && (
-                                        <a
-                                            href={p.liveUrl}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                        <span
                                             aria-label={`Live site for ${p.name}`}
-                                            className="fg-faint hover:text-[hsl(var(--accent-from))]"
+                                            className="fg-faint text-[hsl(var(--accent-from))]"
                                         >
                                             <ExternalLink size={18} />
-                                        </a>
+                                        </span>
                                     )}
                                 </header>
                                 {p.category && (
@@ -260,6 +259,7 @@ export default function ProjectsEnhanced(): JSX.Element {
                                 </ul>
                             </div>
                         </article>
+                        </Link>
                     </li>
                 ))}
             </ul>

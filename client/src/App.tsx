@@ -9,6 +9,7 @@ import Home               from "@/pages/Home";
 import NotFound           from "@/pages/not-found";
 import ProjectsGridPage   from "@/pages/projects";      // ← your existing projects.tsx
 import ProjectsTablePage  from "@/pages/ProjectsPage"; // ← your existing ProjectsPage.tsx
+import ProjectDetail      from "@/pages/ProjectDetail";
 
 
 function AppRoutes() {
@@ -17,6 +18,7 @@ function AppRoutes() {
             <Route path="/"                 component={Home}               />
             <Route path="/projects/grid"    component={ProjectsGridPage}   />
             <Route path="/projects/table"   component={ProjectsTablePage}  />
+            <Route path="/projects/:slugOrId" component={ProjectDetail}      />
             <Route                          component={NotFound}          />
         </Switch>
     );

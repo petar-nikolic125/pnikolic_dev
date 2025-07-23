@@ -118,7 +118,7 @@ export const projects: Project[] = [
   },
   {
     id: 7,
-    slug: "search-engine-sim",
+    slug: "multithreaded-word-finder",
     name: "Search‑Engine Simulator (OS2025)",
     description:
         "Lock‑free, multi‑threaded text indexer & contextual search CLI in pure C.",

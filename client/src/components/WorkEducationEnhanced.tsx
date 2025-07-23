@@ -246,6 +246,15 @@ function EduCard({ item, index }: { item: any; index: number }) {
                         <Download size={12} /> PDF
                     </a>
                 )}
+                
+                {item.detailUrl && (
+                    <a
+                        href={item.detailUrl}
+                        className="mt-1 inline-block px-3 py-1 rounded bg-teal-500 text-white font-semibold hover:bg-teal-600 transition text-xs"
+                    >
+                        View Project
+                    </a>
+                )}
             </div>
 
             {item.ribbon && (
