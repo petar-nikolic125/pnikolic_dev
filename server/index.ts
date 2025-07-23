@@ -57,8 +57,21 @@ app.use((req, res, next) => {
     serveStatic(app);
   }
 
-  const PORT = Number(process.env.PORT) || 3001;
-  server.listen(PORT, () => {
+  const PORT = Number(process.env.PORT) || 5000;
+  server.listen(PORT, "0.0.0.0", () => {
     console.log(`🚀 Server listening at http://localhost:${PORT}`);
+    console.log(`🎯 Application ready at http://localhost:${PORT}`);
+  });
+  
+  server.on('error', (err: any) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`Port ${PORT} is already in use. Trying port ${PORT + 1}...`);
+      server.listen(PORT + 1, "0.0.0.0", () => {
+        console.log(`🚀 Server listening at http://localhost:${PORT + 1}`);
+        console.log(`🎯 Application ready at http://localhost:${PORT + 1}`);
+      });
+    } else {
+      throw err;
+    }
   });
 })();
