@@ -2,22 +2,38 @@
   "include": ["client/src/**/*", "shared/**/*", "server/**/*"],
   "exclude": ["node_modules", "build", "dist", "**/*.test.ts"],
   "compilerOptions": {
+    /* Build behaviour */
     "incremental": true,
     "tsBuildInfoFile": "./node_modules/typescript/tsbuildinfo",
     "noEmit": true,
+
+    /* Language & module settings */
+    "target": "ES2017",
     "module": "ESNext",
-    "strict": true,
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "jsx": "preserve",
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "allowImportingTsExtensions": true,
     "moduleResolution": "bundler",
+    "downlevelIteration": true,
+
+    /* Strictness & type‑safety */
+    "strict": true,
+    "skipLibCheck": true,
+
+    /* JSX / React */
+    "jsx": "preserve",
+
+    /* Interop & JSON imports */
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+
+    /* Base URL & path aliases */
     "baseUrl": ".",
-    "types": ["node", "vite/client"],
     "paths": {
       "@/*": ["./client/src/*"],
       "@shared/*": ["./shared/*"]
-    }
+    },
+
+    /* Lib definitions & global types */
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "types": ["node", "vite/client"]
   }
 }

@@ -1,235 +1,106 @@
-/* ────────────────────────────────────────────────────────────
-   Skills.tsx · "ultimate" polished showcase board
-   Pure React + Tailwind
-   Icons: @icons-pack/react-simple-icons + emoji fall-backs
-   Last updated 2025-06-28
-──────────────────────────────────────────────────────────── */
+/* ───────── src/components/Skills.tsx ─────────
+   JSON‑driven skills showcase · 4 × 2 board
+   Long labels wrap     ·     bins keep their 4‑column feel
+────────────────────────────────────────────── */
 
-import { FC, useEffect, useRef, useState } from "react";
-import type { SVGProps } from "react";
-import type { IconType } from "@icons-pack/react-simple-icons";
+import { useEffect, useRef, useState } from 'react'
+import { skills as raw } from '@/hooks/useSkills'
 
-/* —— Simple-Icons imports —— */
-// @ts-ignore
-import {
-  /* Web */
-  SiHtml5,
-  SiCss,
-  SiJavascript,
-  SiTypescript,
-  SiReact,
-  SiVuedotjs,
-  SiNextdotjs,
-  SiTailwindcss,
-  SiWebflow,
-  /* Databases */
-  SiMysql,
-  SiPostgresql,
-  SiMongodb,
-  SiRedis,
-  SiSqlite,
-  SiSupabase,
-  /* AI & ML */
-  SiTensorflow,
-  SiPytorch,
-  SiOpenai,
-  SiHuggingface,
-  /* Commerce / CMS */
-  SiShopify,
-  SiWordpress,
-  SiStripe,
-  SiWoocommerce,
-  /* Languages / Kernel */
-  SiPython,
-  SiC,
-  SiCplusplus,
-  SiLinux,
-  SiKubernetes,
-  SiRust,
-  /* Tools */
-  SiGit,
-  SiGithub,
-  SiDocker,
-  SiPostman,
-  SiJira,
-  SiFigma,
-  SiEslint,
-  SiPrettier,
-  SiNpm,
-} from "@icons-pack/react-simple-icons";
+/* -------- always end with exactly 8 bins (4 × 2) -------- */
+const COLUMNS = 4
+const ROWS    = 2
+const CELLS   = COLUMNS * ROWS
 
-/* —— emoji fall-backs —— */
-type EmojiIcon = FC<SVGProps<SVGSVGElement> & { size?: number }>;
-
-const JavaIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>☕</span>
-);
-const VSCodeIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>🛠️</span>
-);
-const JetBrainsIcon: EmojiIcon = ({ size = 32, className }) => (
-    <span style={{ fontSize: size }} className={className}>⚙️</span>
-);
-
-/* —— icon union type —— */
-type SkillIcon = IconType | EmojiIcon;
-
-/* —— data model —— */
-interface Skill  { label: string; Icon: SkillIcon }
-interface Column { title: string; items: Skill[]  }
-
-/* —— 2-row board data (Web = 4×2) —— */
-const columns: Column[] = [
-  {
-    title: "Web",
-    items: [
-      { label: "HTML5",        Icon: SiHtml5 },
-      { label: "CSS3",         Icon: SiCss },
-      { label: "JavaScript",   Icon: SiJavascript },
-      { label: "TypeScript",   Icon: SiTypescript },
-      { label: "React",        Icon: SiReact },
-      { label: "Vue.js",       Icon: SiVuedotjs },
-      { label: "Next.js",      Icon: SiNextdotjs },
-      { label: "Tailwind CSS", Icon: SiTailwindcss },
-    ],
-  },
-  {
-    title: "Database",
-    items: [
-      { label: "MySQL",      Icon: SiMysql },
-      { label: "PostgreSQL", Icon: SiPostgresql },
-      { label: "MongoDB",    Icon: SiMongodb },
-      { label: "Redis",      Icon: SiRedis },
-      { label: "SQLite",     Icon: SiSqlite },
-      { label: "Supabase",   Icon: SiSupabase },
-    ],
-  },
-  {
-    title: "AI & ML",
-    items: [
-      { label: "TensorFlow",   Icon: SiTensorflow },
-      { label: "PyTorch",      Icon: SiPytorch },
-      { label: "OpenAI",       Icon: SiOpenai },
-      { label: "Hugging Face", Icon: SiHuggingface },
-    ],
-  },
-  {
-    title: "Commerce",
-    items: [
-      { label: "Shopify",     Icon: SiShopify },
-      { label: "WordPress",   Icon: SiWordpress },
-      { label: "Stripe",      Icon: SiStripe },
-      { label: "WooCommerce", Icon: SiWoocommerce },
-    ],
-  },
-  {
-    title: "Languages",
-    items: [
-      { label: "TypeScript", Icon: SiTypescript },
-      { label: "Python",     Icon: SiPython },
-      { label: "Java",       Icon: JavaIcon },
-      { label: "Rust",       Icon: SiRust },
-    ],
-  },
-  {
-    title: "C & Kernel",
-    items: [
-      { label: "C",          Icon: SiC },
-      { label: "C++",        Icon: SiCplusplus },
-      { label: "Linux",      Icon: SiLinux },
-      { label: "Kubernetes", Icon: SiKubernetes },
-    ],
-  },
-  {
-    title: "Tools",
-    items: [
-      { label: "VS Code",  Icon: VSCodeIcon },
-      { label: "Git",      Icon: SiGit },
-      { label: "GitHub",   Icon: SiGithub },
-      { label: "Docker",   Icon: SiDocker },
-      { label: "Postman",  Icon: SiPostman },
-      { label: "Jira",     Icon: SiJira },
-      { label: "Figma",    Icon: SiFigma },
-      { label: "ESLint",   Icon: SiEslint },
-      { label: "Prettier", Icon: SiPrettier },
-      { label: "NPM",      Icon: SiNpm },
-    ],
-  },
-  {
-    title: "Other",
-    items: [
-      { label: "Webflow",    Icon: SiWebflow },
-      { label: "JetBrains",  Icon: JetBrainsIcon },
-    ],
-  },
-];
-
-/* ══════════════════════════════════════════════════════════ */
+const skills = (() => {
+  const arr = [...raw]
+  while (arr.length < CELLS) arr.push({ category: '', items: [] })
+  return arr.slice(0, CELLS)
+})()
 
 export default function Skills() {
-  const sectionRef = useRef<HTMLElement|null>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLElement | null>(null)
+  const [show, setShow] = useState(false)
 
+  /* one‑shot fade‑in */
   useEffect(() => {
     const io = new IntersectionObserver(
-        ([e]) => e.isIntersecting && setIsVisible(true),
+        ([e]) => e.isIntersecting && setShow(true),
         { threshold: 0.25 }
-    );
-    if (sectionRef.current) io.observe(sectionRef.current);
-    return () => io.disconnect();
-  }, []);
+    )
+    if (ref.current) io.observe(ref.current)
+    return () => io.disconnect()
+  }, [])
 
   return (
       <section
           id="skills"
-          ref={sectionRef}
-          className="py-12 md:py-16 lg:py-20 px-6 md:px-10 lg:px-16
-                 max-w-screen-xl mx-auto"
+          ref={ref}
+          className="mx-auto max-w-screen-xl px-6 md:px-10 lg:px-16
+                 py-12 md:py-16 lg:py-20"
       >
-        <h2 className="text-center text-4xl md:text-5xl font-serif font-bold
-                     mb-12 md:mb-16">
+        <h2 className="mb-12 md:mb-16 text-center font-serif font-bold
+                     text-4xl md:text-5xl">
           Skills
         </h2>
 
-        {/* two balanced rows of 4 columns */}
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-x-10 gap-y-16">
-          {columns.map((col, cIdx) => (
-              <div
-                  key={col.title}
-                  className={`flex flex-col items-center ${
-                      isVisible ? "animate-fade-up" : "opacity-0"
-                  }`}
-                  style={{ animationDelay: `${cIdx * 80}ms` }}
-              >
-                <h3 className="mb-7 text-lg md:text-xl font-semibold">
-                  {col.title}
-                </h3>
+        {/* outer 4 × 2 board */}
+        <div
+            className="
+          grid gap-y-16 gap-x-12
+          sm:grid-cols-2
+          md:grid-cols-4 md:grid-rows-2 md:grid-flow-col
+        "
+        >
+          {skills.map((col, idx) =>
+              col.category ? (
+                  <div
+                      key={col.category}
+                      className={`flex flex-col items-center
+                          ${show ? 'animate-fade-up' : 'opacity-0'}`}
+                      style={{ animationDelay: `${idx * 80}ms` }}
+                  >
+                    <h3 className="mb-7 text-center font-semibold
+                             text-lg md:text-xl">
+                      {col.category}
+                    </h3>
 
-                <ul
-                    className={
-                      col.title === "Web"
-                          ? "grid grid-cols-4 grid-rows-2 gap-x-6 gap-y-8"
-                          : "grid grid-rows-2 grid-flow-col gap-x-6 gap-y-8"
-                    }
-                >
-                  {col.items.map(({ label, Icon }, iIdx) => (
-                      <li
-                          key={label}
-                          className="flex flex-col items-center text-neutral-300
-                             transition-transform hover:-translate-y-1
-                             hover:scale-110"
-                          style={{ animationDelay: `${iIdx * 30}ms` }}
-                      >
-                        <Icon size={32} className="mb-2" />
-                        <span className="text-xs md:text-sm text-center tracking-wide">
-                    {label}
-                  </span>
-                      </li>
-                  ))}
-                </ul>
-              </div>
-          ))}
+                    {/* ► fixed three columns under md, four from md↑
+                  ► keeps equal column widths so bins NEVER collapse
+                  ► long labels wrap with fluid font‑size           */}
+                    <ul
+                        className="
+                  grid gap-x-6 gap-y-8 place-items-center
+                  grid-cols-3
+                  md:grid-cols-4
+                "
+                    >
+                      {col.items.map(({ label, Icon }, i) => (
+                          <li
+                              key={label}
+                              className="flex flex-col items-center text-neutral-300
+                               transition-transform
+                               hover:-translate-y-1 hover:scale-110"
+                              style={{ animationDelay: `${i * 30}ms` }}
+                          >
+                            <Icon size={32} className="mb-2" />
+                            <span
+                                className="
+                        text-center leading-snug break-words whitespace-normal
+                        max-w-[6rem]
+                        text-[clamp(0.6rem,0.75vw,0.75rem)]
+                      "
+                            >
+                      {label}
+                    </span>
+                          </li>
+                      ))}
+                    </ul>
+                  </div>
+              ) : (
+                  <div key={`pad-${idx}`} className="invisible" />
+              )
+          )}
         </div>
       </section>
-  );
+  )
 }

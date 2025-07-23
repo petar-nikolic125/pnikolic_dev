@@ -1,0 +1,69 @@
+[
+  {
+    "id": 1,
+    "name": "Full‑Stack Interactive Website Showcase",
+    "description": "Real‑time component assembly; cut development time by 60 % and boosted engagement by 280 %.",
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    "technologies": ["React", "TypeScript", "Three.js", "Spline"],
+    "liveUrl": "https://pixel-component-craft.vercel.app/",
+    "sourceUrl": "#",
+    "type": "Web App",
+    "availability": "Live",
+    "category": "Website Display"
+  },
+  {
+    "id": 3,
+    "name": "Melanoma Detection CNN",
+    "description": "92 % AUC on ISIC‑2018; inference < 45 ms on RTX 3060.",
+    "image": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    "technologies": ["Python", "PyTorch", "FastAPI", "OpenCV"],
+    "liveUrl": "#",
+    "type": "AI/ML",
+    "availability": "Live",
+    "category": "AI / Medicine"
+  },
+  {
+    "id": 4,
+    "name": "Psychotherapist Scheduler",
+    "description": "Handles 10 k concurrent bookings; ACID via MySQL and PL/pgSQL; HIPAA‑ready.",
+    "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    "technologies": ["Java", "JavaFX", "MySQL", "PostgreSQL"],
+    "liveUrl": "#",
+    "type": "Enterprise",
+    "availability": "Live",
+    "category": "Enterprise Java"
+  },
+  {
+    "id": 5,
+    "name": "Interactive Portfolio Explainer",
+    "description": "Three‑scene CSS/JS animation; reduced client onboarding time by 60 %.",
+    "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    "technologies": ["CSS", "JavaScript", "GSAP", "Three.js"],
+    "liveUrl": "#",
+    "type": "Web App",
+    "availability": "Live",
+    "category": "Motion Design"
+  },
+  {
+    "id": 6,
+    "name": "Data‑Visualisation Engine",
+    "description": "Streams 1 M points with < 50 ms latency.",
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600",
+    "technologies": ["WebGL", "D3.js", "Canvas", "WebSocket"],
+    "liveUrl": "#",
+    "type": "3D Interactive",
+    "availability": "Live",
+    "category": "WebGL Charts"
+  },
+  {
+    "id": 7,
+    "name": "Search‑Engine Simulator (OS2025)",
+    "description": "Lock‑free, multi‑threaded text indexer & contextual search CLI in pure C.",
+    "image": "...",
+    "technologies": ["C17", "Pthreads", "Lock‑free DS"],
+    "sourceUrl": "https://github.com/<you>/search_engine_sim",
+    "type": "Systems",
+    "availability": "Source Available",
+    "category": "Operating Systems"
+  }
+]

@@ -1,0 +1,99 @@
+[
+  {
+    "category": "Languages",
+    "items": [
+      { "label": "JavaScript",  "icon": "SiJavascript" },
+      { "label": "TypeScript",  "icon": "SiTypescript" },
+      { "label": "Python",      "icon": "SiPython" },
+      { "label": "Java",        "icon": "emoji:☕" },
+      { "label": "C",           "icon": "SiC" },
+      { "label": "C++",         "icon": "SiCplusplus" },
+      { "label": "Rust",        "icon": "SiRust" }
+    ]
+  },
+
+  {
+    "category": "Frameworks & Libraries",
+    "items": [
+      { "label": "React",        "icon": "SiReact" },
+      { "label": "Vue.js",       "icon": "SiVuedotjs" },
+      { "label": "Next.js",      "icon": "SiNextdotjs" },
+      { "label": "FastAPI",      "icon": "SiFastapi" },
+      { "label": "PyTorch",      "icon": "SiPytorch" },
+      { "label": "TensorFlow",   "icon": "SiTensorflow" },
+      { "label": "Tailwind CSS", "icon": "SiTailwindcss" }
+    ]
+  },
+
+  {
+    "category": "Databases",
+    "items": [
+      { "label": "MySQL",       "icon": "SiMysql" },
+      { "label": "PostgreSQL",  "icon": "SiPostgresql" },
+      { "label": "MongoDB",     "icon": "SiMongodb" },
+      { "label": "SQLite",      "icon": "SiSqlite" },
+      { "label": "Redis",       "icon": "SiRedis" },
+      { "label": "Supabase",    "icon": "SiSupabase" }
+    ]
+  },
+
+  {
+    "category": "Dev Tools",
+    "items": [
+      { "label": "Docker",     "icon": "SiDocker" },
+      { "label": "Git",        "icon": "SiGit" },
+      { "label": "GitHub",     "icon": "SiGithub" },
+      { "label": "NPM",        "icon": "SiNpm" },
+      { "label": "Postman",    "icon": "SiPostman" },
+      { "label": "Jira",       "icon": "SiJira" },
+      { "label": "Figma",      "icon": "SiFigma" },
+      { "label": "ESLint",     "icon": "SiEslint" },
+      { "label": "Prettier",   "icon": "SiPrettier" },
+      { "label": "VS Code",    "icon": "emoji:🛠️" },
+      { "label": "JetBrains",  "icon": "emoji:⚙️" }
+    ]
+  },
+
+  {
+    "category": "Cloud & Infra",
+    "items": [
+      { "label": "AWS",        "icon": "SiAmazonaws" },
+      { "label": "Kubernetes", "icon": "SiKubernetes" },
+      { "label": "Terraform",  "icon": "SiTerraform" },
+      { "label": "NGINX",      "icon": "SiNginx" },
+      { "label": "Supabase",   "icon": "SiSupabase" }
+    ]
+  },
+
+  {
+    "category": "CS Fundamentals",
+    "items": [
+      { "label": "Operating Systems",  "icon": "SiLinux" },
+      { "label": "Comp. Networks",  "icon": "SiKubernetes" },
+      { "label": "Dist. Systems","icon": "SiSocketdotio" },
+      { "label": "Algorithms",    "icon": "SiGraphql" }
+    ]
+  },
+
+  {
+    "category": "Commerce & CMS",
+    "items": [
+      { "label": "Shopify",      "icon": "SiShopify" },
+      { "label": "Stripe",       "icon": "SiStripe" },
+      { "label": "WordPress",    "icon": "SiWordpress" },
+      { "label": "WooCommerce",  "icon": "SiWoocommerce" },
+      { "label": "Webflow",      "icon": "SiWebflow" }
+    ]
+  },
+
+  {
+    "category": "Testing & QA",
+    "items": [
+      { "label": "Jest",        "icon": "SiJest" },
+      { "label": "Cypress",     "icon": "SiCypress" },
+      { "label": "Mocha",       "icon": "SiMocha" },
+      { "label": "Playwright",  "icon": "SiPlaywright" },
+      { "label": "Postman",     "icon": "SiPostman" }
+    ]
+  }
+]
