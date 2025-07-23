@@ -1,0 +1,132 @@
+{
+  "work": [
+    {
+      "id": "w-xv6",
+      "period": "2024",
+      "heading": "xv6 Shared‑Memory Kernel Suite",
+      "subHeading": "4 new syscalls • 18 % higher IPC throughput",
+      "subText": "Implemented System V‑style SHM, custom page‑fault handler and slab allocator; rewrote inode layer for atomic mmap I/O.",
+      "emoji": "🖥️",
+      "ribbon": "HOT",
+      "tech": ["C", "Assembly", "RISC‑V", "Operating Systems"],
+      "metrics": ["18 % speed‑up", "4 syscalls", "2 k LOC"],
+      "repoUrl":  "https://github.com/your‑handle/xv6-shm",
+      "detailUrl": "/projects/shared-memory-kernel",
+      "liveUrl":  "https://github.com/your‑handle/xv6-shm"
+    },
+    {
+      "id": "w-sql-etl",
+      "period": "2024",
+      "heading": "Bank‑Grade SQL ETL & Analytics",
+      "subHeading": "5 TB/day gzip → Parquet → Redshift in < 10 min",
+      "emoji": "📊",
+      "tech": ["PostgreSQL", "AWS Glue", "Airflow", "Python"],
+      "metrics": ["5 TB/day", "<10 min SLA", "99.99 % accuracy"],
+      "ribbon": "LIVE",
+      "detailUrl": "/projects/sql-etl"
+    },
+    {
+      "id": "w-dv-engine",
+      "period": "2023",
+      "heading": "Realtime Data‑Visualisation Engine",
+      "subHeading": "Streams 1 M points @ 60 fps",
+      "emoji": "📈",
+      "tech": ["WebGL", "TypeScript", "D3.js", "WebSocket"],
+      "metrics": ["1 M points", "60 fps", "<50 ms latency"],
+      "detailUrl": "/projects/data-viz-engine"
+    },
+    {
+      "id": "w-javafx-scheduler",
+      "period": "2023",
+      "heading": "Psychotherapist Scheduler (JavaFX)",
+      "subHeading": "Concurrent booking • HIPAA‑ready",
+      "emoji": "📆",
+      "tech": ["Java", "JavaFX", "MySQL", "Docker"],
+      "metrics": ["10 k bookings/s", "99.5 % SLA"],
+      "detailUrl": "/projects/psychotherapist-scheduler"
+    },
+    {
+      "id": "w-component-forge",
+      "period": "2024",
+      "heading": "Component Forge – Live React Builder",
+      "subHeading": "98 Lighthouse • 60 fps • PWA",
+      "emoji": "🧩",
+      "ribbon": "LIVE",
+      "tech": ["React", "Three.js", "Tailwind", "TypeScript"],
+      "metrics": ["98 LH", "60 fps", "PWA"],
+      "liveUrl":  "https://pixel-component-craft.vercel.app/",
+      "detailUrl": "/projects/component-forge"
+    }
+  ],
+
+  "education": [
+    {
+      "id": "e-raf",
+      "period": "2023 – Present",
+      "heading": "RAF – B.Sc. Software Engineering",
+      "emoji": "🎓"
+    },
+    {
+      "id": "e-intro-prog",
+      "period": "2023 / Sem 1",
+      "heading": "Introduction to Programming",
+      "subHeading": "C • Algorithms • CLI Apps",
+      "emoji": "💻"
+    },
+    {
+      "id": "e-oop",
+      "period": "2023 / Sem 2",
+      "heading": "Object‑Oriented Programming",
+      "subHeading": "Java • UML • MVC GUI",
+      "emoji": "☕"
+    },
+    {
+      "id": "e-systems",
+      "period": "2023 / Sem 2",
+      "heading": "Fundamentals of Computer Systems",
+      "subHeading": "ALU • Cache • Micro‑ops",
+      "emoji": "🔧",
+      "docUrl": "/syllabi/computer_systems.pdf"
+    },
+    {
+      "id": "e-dsa",
+      "period": "2024 / Sem 3",
+      "heading": "Algorithms & Data Structures",
+      "subHeading": "AVL • Graph Search • Heaps",
+      "emoji": "📚"
+    },
+    {
+      "id": "e-databases",
+      "period": "2025 / Sem 4",
+      "heading": "Database Systems",
+      "subHeading": "ER → 3NF • SQL • ACID",
+      "emoji": "🗄️",
+      "docUrl": "/projects/sql_design.pdf"
+    },
+    {
+      "id": "e-os",
+      "period": "2024 / Sem 4",
+      "heading": "Operating Systems",
+      "subHeading": "Paging • Schedulers • IPC",
+      "emoji": "🖥️",
+      "docUrl":  "/projects/xv6_extensions.pdf",
+      "repoUrl": "https://github.com/petar-nikolic125/Multithreaded-Word-Finder",
+      "detailUrl": "/projects/word-finder"
+    },
+    {
+      "id": "e-networks",
+      "period": "2025 / Sem 4",
+      "heading": "Computer Networks",
+      "subHeading": "TCP/IP • SDN • Wireshark",
+      "emoji": "🌐"
+    },
+    {
+      "id": "e-ai",
+      "period": "2024 / Sem 5",
+      "heading": "Intelligent Systems",
+      "subHeading": "Search • Machine Learning • Agents",
+      "emoji": "🤖",
+      "docUrl": "/whitepapers/ai_medicine.pdf"
+    }
+  ]
+}
