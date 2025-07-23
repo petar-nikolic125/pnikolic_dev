@@ -10,6 +10,7 @@ import NotFound           from "@/pages/not-found";
 import ProjectsGridPage   from "@/pages/projects";      // ← your existing projects.tsx
 import ProjectsTablePage  from "@/pages/ProjectsPage"; // ← your existing ProjectsPage.tsx
 
+
 function AppRoutes() {
     return (
         <Switch>
