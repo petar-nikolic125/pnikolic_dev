@@ -120,6 +120,8 @@ The application implements a comprehensive design system with:
 ```
 Changelog:
 - June 28, 2025. Initial setup
+- January 23, 2025. Fixed DOM nesting warning in ProjectsEnhanced component by removing nested anchor tags
+- January 23, 2025. Debugged and resolved application startup issues - both client and server now running properly
 ```
 
 ## User Preferences

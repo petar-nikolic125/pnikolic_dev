@@ -198,13 +198,13 @@ export default function ProjectsEnhanced(): JSX.Element {
             >
                 {filtered.map((p, i) => (
                     <li key={p.id}>
-                        <Link href={`/projects/${p.slug || p.id}`}>
-                            <article
-                                tabIndex={0}
-                                aria-labelledby={`proj-${p.id}-title`}
-                                className="group relative rounded-xl border bg-[hsl(var(--bg-surface)/.6)] hover-lift transition-all focus:outline focus:ring-2 cursor-pointer"
-                                style={{ animationDelay: `${i * 60}ms` }}
-                            >
+                        <article
+                            tabIndex={0}
+                            aria-labelledby={`proj-${p.id}-title`}
+                            className="group relative rounded-xl border bg-[hsl(var(--bg-surface)/.6)] hover-lift transition-all focus:outline focus:ring-2 cursor-pointer"
+                            style={{ animationDelay: `${i * 60}ms` }}
+                            onClick={() => window.location.href = `/projects/${p.slug || p.id}`}
+                        >
                             {/* image */}
                             <div className="relative overflow-hidden">
                                 <img
@@ -259,7 +259,6 @@ export default function ProjectsEnhanced(): JSX.Element {
                                 </ul>
                             </div>
                         </article>
-                        </Link>
                     </li>
                 ))}
             </ul>
