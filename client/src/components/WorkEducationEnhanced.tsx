@@ -322,9 +322,5 @@ function Backdrop() {
 }
 
 export default function WorkExperienceEnhanced() {
-    return (
-        <Fragment>
-            <Timeline />
-        </Fragment>
-    )
+    return <Timeline />
 }
