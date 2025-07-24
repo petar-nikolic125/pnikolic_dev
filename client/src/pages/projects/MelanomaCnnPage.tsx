@@ -3,6 +3,8 @@ import ProjectHeader from '@/components/ProjectHeader'
 import TechStack from '@/components/TechStack'
 import Gallery from '@/components/Gallery'
 import LinksPanel from '@/components/LinksPanel'
+import EnhancedTags from '@/components/EnhancedTags'
+import GradientCard, { MetricCard } from '@/components/GradientCard'
 import { projects } from '@/data/portfolio'
 
 export default function MelanomaCnnPage() {
@@ -129,6 +131,13 @@ export default function MelanomaCnnPage() {
             </div>
           </div>
         </section>
+
+        <EnhancedTags 
+          methodologies={project.methodologies}
+          paradigms={project.paradigms}
+          architecture={project.architecture}
+          taglines={project.taglines}
+        />
 
         <Gallery images={images} title="📸 Model Visualizations" />
         
