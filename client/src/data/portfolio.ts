@@ -125,7 +125,7 @@ export const projects: Project[] = [
     image:
         "https://images.unsplash.com/photo-1527430253228-e93688616381?auto=format&fit=crop&w=800&h=600",
     technologies: ["C17", "Pthreads", "Lock‑free DS"],
-    sourceUrl: "https://github.com/<you>/search_engine_sim",
+    sourceUrl: "https://github.com/petar-nikolic125/Multithreaded-Word-Finder",
     type: "Systems",
     availability: "Source Available",
     category: "Operating Systems",
