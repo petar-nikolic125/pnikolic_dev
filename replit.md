@@ -126,6 +126,9 @@ Changelog:
 - January 25, 2025. Implemented shared components (ProjectHeader, TechStack, Gallery, LinksPanel) for consistent styling
 - January 25, 2025. Updated routing system to support individual project URLs (/projects/[slug])
 - January 25, 2025. Added rich content support for tables, images, and detailed technical descriptions
+- January 25, 2025. Fixed routing from WorkEducationEnhanced component - all project links now properly navigate to individual project pages
+- January 25, 2025. Added GitHub source links to all 7 projects in portfolio data
+- January 25, 2025. Connected work experience JSON data to project detail pages via detailUrl properties
 ```
 
 ## User Preferences

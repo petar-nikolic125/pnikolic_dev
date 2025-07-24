@@ -23,7 +23,7 @@
       "tech": ["PostgreSQL", "AWS Glue", "Airflow", "Python"],
       "metrics": ["5 TB/day", "<10 min SLA", "99.99 % accuracy"],
       "ribbon": "LIVE",
-      "detailUrl": "/projects/sql-etl"
+      "detailUrl": "/projects/melanoma-cnn"
     },
     {
       "id": "w-dv-engine",
@@ -33,7 +33,7 @@
       "emoji": "📈",
       "tech": ["WebGL", "TypeScript", "D3.js", "WebSocket"],
       "metrics": ["1 M points", "60 fps", "<50 ms latency"],
-      "detailUrl": "/projects/data-viz-engine"
+      "detailUrl": "/projects/data-vis-engine"
     },
     {
       "id": "w-javafx-scheduler",
@@ -55,7 +55,7 @@
       "tech": ["React", "Three.js", "Tailwind", "TypeScript"],
       "metrics": ["98 LH", "60 fps", "PWA"],
       "liveUrl":  "https://pixel-component-craft.vercel.app/",
-      "detailUrl": "/projects/component-forge"
+      "detailUrl": "/projects/full-stack-showcase"
     }
   ],
 

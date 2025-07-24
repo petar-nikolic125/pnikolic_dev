@@ -184,6 +184,17 @@ function WorkCard({ item, index }: { item: any; index: number }) {
                         ))}
                     </div>
                 )}
+                
+                {item.detailUrl && (
+                    <div className="mt-2">
+                        <a
+                            href={item.detailUrl}
+                            className="inline-block px-3 py-1 rounded bg-sky-500 text-white font-semibold hover:bg-sky-600 transition text-xs"
+                        >
+                            View Project
+                        </a>
+                    </div>
+                )}
             </div>
 
             {item.ribbon && (
