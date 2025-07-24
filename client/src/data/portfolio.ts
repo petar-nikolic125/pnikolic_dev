@@ -48,6 +48,7 @@ export const projects: Project[] = [
         "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&h=600",
     technologies: ["React", "TypeScript", "Three.js", "Spline"],
     liveUrl: "https://pixel-component-craft.vercel.app/",
+    sourceUrl: "https://github.com/petar-nikolic125/full-stack-showcase",
     type: "Web App",
     availability: "Live",
     category: "Website Display",
@@ -61,7 +62,7 @@ export const projects: Project[] = [
     image:
         "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?auto=format&fit=crop&w=800&h=600",
     technologies: ["C", "Assembly", "Operating Systems"],
-    sourceUrl: "https://github.com/<you>/xv6-shm",
+    sourceUrl: "https://github.com/petar-nikolic125/xv6-shared-memory",
     type: "Systems",
     availability: "Source Available",
     category: "Systems / C",
@@ -74,6 +75,7 @@ export const projects: Project[] = [
     image:
         "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=800&h=600",
     technologies: ["Python", "PyTorch", "FastAPI", "OpenCV"],
+    sourceUrl: "https://github.com/petar-nikolic125/melanoma-detection-cnn",
     type: "AI/ML",
     availability: "Live",
     category: "AI / Medicine",
@@ -87,6 +89,7 @@ export const projects: Project[] = [
     image:
         "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&h=600",
     technologies: ["Java", "JavaFX", "MySQL", "PostgreSQL"],
+    sourceUrl: "https://github.com/petar-nikolic125/psychotherapist-scheduler",
     type: "Enterprise",
     availability: "Live",
     category: "Enterprise Java",
@@ -100,6 +103,7 @@ export const projects: Project[] = [
     image:
         "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&h=600",
     technologies: ["CSS", "JavaScript", "GSAP", "Three.js"],
+    sourceUrl: "https://github.com/petar-nikolic125/portfolio-explainer",
     type: "Web App",
     availability: "Live",
     category: "Motion Design",
@@ -112,6 +116,7 @@ export const projects: Project[] = [
     image:
         "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&h=600",
     technologies: ["WebGL", "D3.js", "Canvas", "WebSocket"],
+    sourceUrl: "https://github.com/petar-nikolic125/data-vis-engine",
     type: "3D Interactive",
     availability: "Live",
     category: "WebGL Charts",
