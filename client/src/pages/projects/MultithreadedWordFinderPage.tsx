@@ -31,18 +31,6 @@ export default function MultithreadedWordFinderPage() {
       alt: 'CLI Interface in Action',
       title: 'Interactive CLI Interface',
       description: 'ANSI-colored terminal interface with real-time indexing progress and search results'
-    },
-    {
-      src: '/api/placeholder/800/600', 
-      alt: 'Architecture Diagram',
-      title: 'System Architecture',
-      description: 'Thread pool architecture with lock-free hash map and concurrent file processing'
-    },
-    {
-      src: '/api/placeholder/800/600',
-      alt: 'Performance Benchmarks',
-      title: 'Performance Analysis',
-      description: 'Concurrent indexing performance vs single-threaded baseline'
     }
   ]
 
