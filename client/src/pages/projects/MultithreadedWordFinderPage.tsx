@@ -5,10 +5,12 @@ import Gallery from '@/components/Gallery'
 import LinksPanel from '@/components/LinksPanel'
 import EnhancedTags from '@/components/EnhancedTags'
 import GradientCard, { MetricCard } from '@/components/GradientCard'
+import { useProjectImages } from '@/hooks/useProjectImages'
 import { projects } from '@/data/portfolio'
 
 export default function MultithreadedWordFinderPage() {
   const project = projects.find(p => p.slug === 'multithreaded-word-finder')!
+  const { images } = useProjectImages('multithreaded-word-finder')
   
   // Update the GitHub URL to the correct one
   const projectWithCorrectUrl = {
@@ -25,14 +27,14 @@ export default function MultithreadedWordFinderPage() {
     }
   ]
 
-  const images = [
+  const galleryImages = images([
     {
-      src: '/projects/multithreaded-word-finder/osword.png',
+      name: 'osword.png',
       alt: 'CLI Interface in Action',
       title: 'Interactive CLI Interface',
       description: 'ANSI-colored terminal interface with real-time indexing progress and search results'
     }
-  ]
+  ])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
@@ -166,7 +168,7 @@ export default function MultithreadedWordFinderPage() {
           taglines={project.taglines}
         />
 
-        <Gallery images={images} title="📸 Screenshots & Diagrams" />
+        <Gallery images={galleryImages} title="📸 Screenshots & Diagrams" />
         
         <TechStack technologies={project.technologies} />
         

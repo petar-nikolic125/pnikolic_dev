@@ -5,6 +5,8 @@ import TechStack       from '@/components/TechStack'
 import Gallery         from '@/components/Gallery'
 import LinksPanel      from '@/components/LinksPanel'
 import EnhancedTags    from '@/components/EnhancedTags'
+import ProjectImage    from '@/components/ProjectImage'
+import { useProjectImages } from '@/hooks/useProjectImages'
 import { projects }    from '@/data/portfolio'
 
 /* -------------------------------------------------------------------------- */
@@ -38,6 +40,7 @@ function BarChart({
 
 export default function SharedMemoryKernelPage() {
     const project = projects.find(p => p.slug === 'shared-memory-kernel')!
+    const { image, images } = useProjectImages('shared-memory-kernel')
 
     /* ------------------------------------------------------------------ */
     /*  external links                                                    */
@@ -54,25 +57,24 @@ export default function SharedMemoryKernelPage() {
     /* ------------------------------------------------------------------ */
     /*  gallery images (architectural diagrams, etc.)                     */
     /* ------------------------------------------------------------------ */
-    const images = [
+    const galleryImages = images([
         {
-            src: '/projects/shared-memory-kernel/shared_memory_png.png',
+            name: 'shared_memory_png.png',
             alt: 'Architecture overview diagram',
             title: 'Shared Memory Flow',
             description: 'shm_open → shm_trunc → shm_map → fork → shm_close'
         }
-    ]
+    ])
 
     /* ------------------------------------------------------------------ */
     /*  stress‑test proof screenshot                                      */
     /* ------------------------------------------------------------------ */
-    const stressImg = {
-        src: '/projects/shared-memory-kernel/stresstest.png',
-        alt: 'xv6 shmtest stress output',
-        title: 'Stress Test Output',
-        description:
-            'shmtest verifies open‑limit, trunc‑map sequencing, and ref‑count logic'
-    }
+    const stressImg = image(
+        'stresstest.png',
+        'xv6 shmtest stress output',
+        'Stress Test Output',
+        'shmtest verifies open‑limit, trunc‑map sequencing, and ref‑count logic'
+    )
 
     /* ------------------------------------------------------------------ */
     /*  synthetic throughput dataset for on‑page bar chart                 */
@@ -334,7 +336,7 @@ make qemu-nox   # run shmtest inside QEMU`}
                     architecture={project.architecture}
                     taglines={project.taglines}
                 />
-                <Gallery images={images} title="📸 System Diagrams" />
+                <Gallery images={galleryImages} title="📸 System Diagrams" />
                 <TechStack technologies={project.technologies} />
                 <LinksPanel links={links} />
             </main>
