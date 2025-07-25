@@ -135,6 +135,7 @@ Changelog:
 - January 25, 2025. Integrated enhanced tag displays into all 7 project pages with expanded technical details
 - January 25, 2025. Successfully migrated project from Replit Agent to Replit environment
 - January 25, 2025. Implemented modular image system: created public/projects/[slug]/ structure, added Express static middleware, moved images to correct project folders
+- January 25, 2025. Fixed image placement system: correctly mapped image_1753308651728.png → osword.png (MultithreadedWordFinder), image_1753354269225.png → shared_memory_png.png and image_1753308686828.png → stresstest.png (SharedMemoryKernel)
 ```
 
 ## User Preferences
