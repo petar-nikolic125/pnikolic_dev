@@ -27,7 +27,7 @@ export default function MultithreadedWordFinderPage() {
 
   const images = [
     {
-      src: '/api/placeholder/800/600',
+      src: '/projects/multithreaded-word-finder/osword.png',
       alt: 'CLI Interface in Action',
       title: 'Interactive CLI Interface',
       description: 'ANSI-colored terminal interface with real-time indexing progress and search results'

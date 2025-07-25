@@ -1,0 +1,21 @@
+I need a fully modular image placement system so all images in the project are served reliably without missing paths or hashing issues. Specifically: move every image into public/projects/<slug>/, serve the entire public/ folder via app.use(express.static(path.join(__dirname,'..','public')));, update page components to reference images by root‑absolute paths (/projects/...). Place:
+shared_memory_png.png and stresstest.png into public/projects/shared-memory-kernel/
+osword.png into public/projects/multithreaded-word-finder/
+Update SharedMemoryKernelPage.tsx so its images array uses src: '/projects/shared-memory-kernel/shared_memory_png.png' and stressImg.src: '/projects/shared-memory-kernel/stresstest.png'. Update MultithreadedWordFinderPage.tsx to reference <img src="/projects/multithreaded-word-finder/osword.png" />. Then output:
+the exact shell script that creates folders and moves files,
+the precise middleware line to add to Express,
+the exact updated image reference snippets in both TSX files.
+Design this system to scale to any future project slug without additional imports. You want a modular, scalable, bullet‑proof image system so that any image you add in the future just works—no more broken links. Specifically:
+All images are placed under public/projects/[project-slug]/
+Express serves everything in public/ with app.use(express.static(path.join(__dirname, '..', 'public')))
+There are three images you already have:
+shared_memory_png.png
+stresstest.png
+osword.png
+They belong to two pages:
+SharedMemoryKernelPage.tsx, slug shared-memory-kernel
+MultithreadedWordFinderPage.tsx, slug multithreaded-word-finder
+Move those existing three images into the correct public/projects/... subfolders.
+Modify SharedMemoryKernelPage.tsx so images and stressImg.src point to /projects/shared-memory-kernel/....
+Modify MultithreadedWordFinderPage.tsx so it references <img src="/projects/multithreaded-word-finder/osword.png" />.
+The system must work in both development and production—no imports, no hashed file names, just using root‑absolute paths. You also need the exact shell script for folder creation and moving, the exact Express middleware line, and the exact updated code snippets for both TSX pages. Once those three files are placed correctly and the code is updated, the job is done—images load reliably everywhere from now on.

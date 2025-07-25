@@ -56,7 +56,7 @@ export default function SharedMemoryKernelPage() {
     /* ------------------------------------------------------------------ */
     const images = [
         {
-            src: '/attached_assets/shared_memory_png.png',   // ← changed path
+            src: '/projects/shared-memory-kernel/shared_memory_png.png',
             alt: 'Architecture overview diagram',
             title: 'Shared Memory Flow',
             description: 'shm_open → shm_trunc → shm_map → fork → shm_close'
@@ -67,7 +67,7 @@ export default function SharedMemoryKernelPage() {
     /*  stress‑test proof screenshot                                      */
     /* ------------------------------------------------------------------ */
     const stressImg = {
-        src: '/attached_assets/stresstest.png',
+        src: '/projects/shared-memory-kernel/stresstest.png',
         alt: 'xv6 shmtest stress output',
         title: 'Stress Test Output',
         description:
